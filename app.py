@@ -46,7 +46,7 @@ class blog_post(db.Model):
     title = db.Column(db.String(100),nullable=False)
     content = db.Column(db.Text,nullable=False)
     posted_by = db.Column(db.String(20),nullable=True) #,default='N/A'
-    posted_on = db.Column(db.DateTime,nullable=False,default=func.now())
+    posted_on = db.Column(db.DateTime(timezone=True),nullable=False,default=func.now())
     author_id = db.Column(db.Integer,db.ForeignKey('user.id',ondelete='CASCADE')
     ,nullable=False) 
     comments = db.relationship('comment',backref='blog_post',passive_deletes=True)
@@ -54,12 +54,11 @@ class blog_post(db.Model):
 class comment(db.Model):
     id = db.Column(db.Integer,primary_key=True)
     text = db.Column(db.Text,nullable=False)
-    created_time = db.Column(db.Integer,nullable=False,default=func.now())
+    created_time = db.Column(db.(timezone=True),nullable=False,default=func.now())
     blog_id = db.Column(db.Integer,db.ForeignKey('blog_post.id',ondelete='CASCADE'),
     nullable=False)
     author_id = db.Column(db.Integer,db.ForeignKey('user.id',ondelete='CASCADE'),
     nullable=False) 
-
 
 
 @app.route('/')
