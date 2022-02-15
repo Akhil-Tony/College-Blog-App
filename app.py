@@ -54,7 +54,7 @@ class blog_post(db.Model):
 class comment(db.Model):
     id = db.Column(db.Integer,primary_key=True)
     text = db.Column(db.Text,nullable=False)
-    created_time = db.Column(db.(timezone=True),nullable=False,default=func.now())
+    created_time = db.Column(db.DateTime(timezone=True),nullable=False,default=func.now())
     blog_id = db.Column(db.Integer,db.ForeignKey('blog_post.id',ondelete='CASCADE'),
     nullable=False)
     author_id = db.Column(db.Integer,db.ForeignKey('user.id',ondelete='CASCADE'),
